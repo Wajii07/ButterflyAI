@@ -1,0 +1,292 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Custom properties ──────────────────────────────────────────────── */
+:root {
+  --forest-950: #020d07;
+  --forest-900: #041f0f;
+  --forest-850: #062914;
+  --forest-800: #0a3d1e;
+  --forest-700: #14532d;
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --emerald-300: #6ee7b7;
+  --teal-400:    #2dd4bf;
+  --gold-400:    #fbbf24;
+  --glass-bg:    rgba(10, 61, 30, 0.35);
+  --glass-border:rgba(52, 211, 153, 0.15);
+}
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', 'Space Grotesk', system-ui, sans-serif;
+  background-color: var(--forest-950);
+  color: #d1fae5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--forest-900); }
+::-webkit-scrollbar-thumb { background: var(--forest-700); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--emerald-500); }
+
+/* ── Selection ────────────────────────────────────────────────────── */
+::selection { background: rgba(16, 185, 129, 0.3); color: #fff; }
+
+/* ── Glassmorphism card ───────────────────────────────────────────── */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1rem;
+}
+
+/* ── Gradient text ────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #34d399 0%, #2dd4bf 50%, #6ee7b7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-gold {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Elegant button ───────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: linear-gradient(135deg, #059669 0%, #0d9488 100%);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(5,150,105,0.4); }
+.btn-primary:hover::after { opacity: 1; }
+.btn-primary:active { transform: translateY(0); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: #34d399;
+  font-weight: 600;
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+}
+.btn-secondary:hover {
+  background: rgba(52, 211, 153, 0.08);
+  border-color: rgba(52, 211, 153, 0.7);
+  transform: translateY(-1px);
+}
+
+/* ── Animated background orbs ────────────────────────────────────── */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orb-drift 18s ease-in-out infinite alternate;
+}
+.bg-orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(5,150,105,0.18) 0%, transparent 70%);
+  top: -150px; left: -100px;
+  animation-delay: 0s;
+}
+.bg-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(13,148,136,0.14) 0%, transparent 70%);
+  bottom: 10%; right: -80px;
+  animation-delay: -6s;
+}
+.bg-orb-3 {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(52,211,153,0.08) 0%, transparent 70%);
+  top: 50%; left: 40%;
+  animation-delay: -12s;
+}
+@keyframes orb-drift {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.08); }
+}
+
+/* ── Butterfly CSS art ────────────────────────────────────────────── */
+.butterfly-art {
+  position: relative;
+  width: 160px;
+  height: 120px;
+  animation: butterfly-float 4s ease-in-out infinite;
+}
+.butterfly-wing {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(52,211,153,0.7) 0%, rgba(13,148,136,0.5) 60%, rgba(6,78,59,0.3) 100%);
+  border: 1px solid rgba(52,211,153,0.3);
+}
+.wing-tl { width:72px; height:52px; top:8px; left:4px; transform-origin: right center; animation: wing-flap 1.8s ease-in-out infinite alternate; transform: rotate(-18deg); }
+.wing-tr { width:72px; height:52px; top:8px; right:4px; transform-origin: left center; animation: wing-flap 1.8s ease-in-out infinite alternate-reverse; transform: rotate(18deg); }
+.wing-bl { width:52px; height:38px; bottom:8px; left:16px; transform-origin: right center; animation: wing-flap 1.8s ease-in-out infinite alternate; transform: rotate(12deg); opacity: 0.75; }
+.wing-br { width:52px; height:38px; bottom:8px; right:16px; transform-origin: left center; animation: wing-flap 1.8s ease-in-out infinite alternate-reverse; transform: rotate(-12deg); opacity: 0.75; }
+.butterfly-body {
+  position: absolute;
+  left: 50%; top: 10px;
+  transform: translateX(-50%);
+  width: 8px; height: 72px;
+  background: linear-gradient(180deg, #064e3b 0%, #0a3d1e 100%);
+  border-radius: 4px;
+}
+@keyframes wing-flap {
+  from { transform: scaleX(1) rotate(-18deg); }
+  to   { transform: scaleX(0.35) rotate(-8deg); }
+}
+.wing-tr { animation-name: wing-flap-r; }
+.wing-br { animation-name: wing-flap-r; }
+@keyframes wing-flap-r {
+  from { transform: scaleX(-1) rotate(-18deg); }
+  to   { transform: scaleX(-0.35) rotate(-8deg); }
+}
+@keyframes butterfly-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+
+/* ── Navbar ───────────────────────────────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(2, 13, 7, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.1);
+  transition: background 0.3s ease;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────────── */
+.confidence-bar {
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(52,211,153,0.15);
+  overflow: hidden;
+}
+.confidence-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #059669, #2dd4bf);
+  transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Drop zone ────────────────────────────────────────────────────── */
+.drop-zone {
+  border: 2px dashed rgba(52,211,153,0.3);
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.drop-zone:hover, .drop-zone.dragging {
+  border-color: rgba(52,211,153,0.7);
+  background: rgba(52,211,153,0.05);
+  transform: scale(1.005);
+}
+
+/* ── Species card ─────────────────────────────────────────────────── */
+.species-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 0.875rem;
+  padding: 1.25rem;
+  transition: all 0.25s ease;
+  cursor: default;
+}
+.species-card:hover {
+  border-color: rgba(52,211,153,0.4);
+  background: rgba(10,61,30,0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+
+/* ── Loading spinner ──────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+.spinner {
+  width: 44px; height: 44px;
+  border: 3px solid rgba(52,211,153,0.15);
+  border-top-color: #34d399;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+/* ── Fade in ──────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.6s ease both;
+}
+.fade-up-delay-1 { animation-delay: 0.1s; }
+.fade-up-delay-2 { animation-delay: 0.22s; }
+.fade-up-delay-3 { animation-delay: 0.34s; }
+.fade-up-delay-4 { animation-delay: 0.46s; }
+
+/* ── Section divider ──────────────────────────────────────────────── */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(52,211,153,0.25), transparent);
+  margin: 2rem 0;
+}
+
+/* ── Stat card ────────────────────────────────────────────────────── */
+.stat-card {
+  background: linear-gradient(135deg, rgba(10,61,30,0.6) 0%, rgba(4,31,15,0.8) 100%);
+  border: 1px solid rgba(52,211,153,0.15);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+.stat-card:hover { transform: translateY(-2px); }
+
+/* ── Cormorant headings ──────────────────────────────────────────── */
+.font-serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+
+/* ── Utility ──────────────────────────────────────────────────────── */
+.text-muted { color: #6ee7b7; opacity: 0.65; }
+.content-layer { position: relative; z-index: 1; }
